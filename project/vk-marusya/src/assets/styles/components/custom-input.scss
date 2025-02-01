@@ -8,8 +8,9 @@
   &__icon {
     position: absolute;
     top: 50%;
-    left: 16px;
-    transform: translateY(-50%);
+    left: 20px;
+    transform: translateY(-45%);
+    opacity: 0.5;
   }
 
   &__input {

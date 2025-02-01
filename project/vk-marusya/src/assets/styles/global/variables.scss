@@ -5,9 +5,11 @@ $color-transparent: rgb(255 255 255 / 0%);
 
 // Project palette
 $color-montana: #393B3C;
+$color-cornflower-blue: #67A5EB;
+$color-salmon: #FF7575;
 
-$main-gradient: linear-gradient(180deg, #000000 0%, rgba(39, 36, 36, 0.7) 100%), 
-linear-gradient(178.73deg, rgba(39, 135, 245, 0.18) -17.53%, rgba(163, 147, 245, 0.18) 131.74%);
+$main-gradient: linear-gradient(178.73deg, rgba(39, 135, 245, 0.18) -17.53%, rgba(163, 147, 245, 0.18) 131.74%), linear-gradient(180deg, #000000 0%, rgba(39, 36, 36, 0.7) 100%);
+
 
 //Высота без учета bar в android, ios
 // Для устранения бага в андроид @see https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
@@ -22,3 +24,6 @@ $ff-open: 'Open', sans-serif;
 $vp-320: 320px;
 
 // Animations
+$transition-default: ease;
+
+$transition-300: 0.3s $transition-default;

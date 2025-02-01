@@ -1,7 +1,11 @@
 <script lang="ts" setup>
-  import mainNavItems from '../data/main-nav/main-nav';
+  import mainNavItems from '../data/main-nav';
   import { RouterLink } from 'vue-router';
-  import TheCustomInput from './TheCustomInput.vue';
+  import CustomInput from './CustomInput.vue';
+  import IconSearch from '@/assets/icons/icon-search.svg';
+
+  const placeholder = 'Поиск';
+  const typeInput = 'text';
 </script>
 
 <template>
@@ -12,6 +16,10 @@
       </li>
     </ul>
 
-    <TheCustomInput />
+    <CustomInput :type-val="typeInput" :placeholder="placeholder">
+      <template v-slot:icon>
+        <IconSearch />
+      </template>
+    </CustomInput>
   </div>
 </template>
