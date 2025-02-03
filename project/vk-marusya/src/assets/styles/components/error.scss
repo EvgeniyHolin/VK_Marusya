@@ -1,0 +1,8 @@
+.error {
+  border-color: $color-salmon;
+
+  & svg {
+    color: $color-salmon;
+    opacity: 1;
+  }
+}

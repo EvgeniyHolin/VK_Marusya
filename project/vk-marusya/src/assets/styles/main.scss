@@ -13,10 +13,18 @@
 // Components
 // ---------------------------------------
 @import './components/container';
+@import './components/btn';
+@import './components/app-wrapper';
 @import './components/header';
 @import './components/main-nav';
 @import './components/custom-input';
+@import './components/user-form';
+@import './components/error';
 
 // Blocks
 // ---------------------------------------
+@import './blocks/modal';
 
+// Animations
+// ---------------------------------------
+@import './animations/fade-animation';
