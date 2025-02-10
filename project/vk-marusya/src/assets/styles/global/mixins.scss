@@ -10,6 +10,24 @@
   }
 }
 
+@mixin hover-focus {
+  &:focus-visible {
+    @content;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin active {
+  &:active {
+    @content;
+  }
+}
+
 @mixin visually-hidden {
   position: absolute;
   overflow: hidden;

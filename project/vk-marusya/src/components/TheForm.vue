@@ -9,6 +9,8 @@
   import removeAllErrorClass from '@/scripts/removeAllErrorClass';
   import validate from '@/scripts/validate';
   import { useAuthUserStore } from '@/stores/AuthUser';
+  import getSessionData from '@/scripts/getSessionData';
+  import { useRouter } from 'vue-router';
 
   defineProps({
     fields: {
@@ -21,7 +23,8 @@
   const emit = defineEmits(['form-submitted']);
 
   const formData = useFormDataStorage();
-  const user = useAuthUserStore()
+  const userAuth = useAuthUserStore();
+  const router = useRouter();
   const matchPassword = ref(true);
   const userExist = ref(false);
   const errorData = ref(false);
@@ -30,11 +33,25 @@
     formData[fieldName] = value
   }
 
-  const getUserInfo = async () => {
+  const openUserSession = async () => {
     await axios.get('https://cinemaguide.skillbox.cc/profile', { withCredentials: true })
       .then(response => {
-        user.toggleAuth();
-        user.userData = response.data;
+        sessionStorage.setItem('authUserData', JSON.stringify(response.data));
+        userAuth.data = getSessionData();
+        userAuth.isAuth = true;
+
+        setTimeout(() => { // закрытие сессии через 12 часов
+          sessionStorage.clear();
+          userAuth.data = {
+            email: '',
+            favorites: [],
+            name: '',
+            surname: ''
+          };
+          userAuth.isAuth = false;
+          router.push('/auth/logout');
+          router.push('/');
+        }, 43200000);
       })
       .catch(error => {
         console.error('Ошибка при получении данных', error)
@@ -102,8 +119,9 @@
       await axios.post('https://cinemaguide.skillbox.cc/auth/login', {
         email: formData.email,
         password: formData.password
-      }, { withCredentials: true }).then(() => {
-          getUserInfo();
+      }, { withCredentials: true }).then(response => {
+          console.log('Статус авторизации:', response.status);
+          openUserSession();
           errorData.value = false;
           handleSubmit();
           removeAllErrorClass();

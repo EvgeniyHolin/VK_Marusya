@@ -14,16 +14,22 @@
 // ---------------------------------------
 @import './components/container';
 @import './components/btn';
+@import './components/active-link';
 @import './components/app-wrapper';
 @import './components/header';
 @import './components/main-nav';
 @import './components/custom-input';
 @import './components/user-form';
+@import './components/footer';
 @import './components/error';
+@import './components/the-picture';
+@import './components/film-card';
 
 // Blocks
 // ---------------------------------------
 @import './blocks/modal';
+@import './blocks/hero';
+@import './blocks/top-films';
 
 // Animations
 // ---------------------------------------

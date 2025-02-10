@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  const props = defineProps({
+  defineProps({
     title: {
       type: String
     }
@@ -7,5 +7,8 @@
 </script>
 
 <template>
-  <button class="btn">{{ props.title }}</button>
+  <button class="btn">
+    {{ title }}
+    <slot />
+  </button>
 </template>

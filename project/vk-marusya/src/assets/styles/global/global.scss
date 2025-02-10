@@ -32,11 +32,18 @@ body {
   background: $main-gradient;
 }
 
+#app {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
 main {
   flex-grow: 1;
   width: 100%;
   min-width: 100%;
   overflow-x: hidden;
+  margin: 32px 0 0;
 }
 
 a {

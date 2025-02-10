@@ -12,5 +12,11 @@
   &__link {
     font-size: 24px;
     line-height: 32px;
+    transition: color $transition-300;
+
+    @include hover-focus {
+      outline: none;
+      color: $color-magenta;
+    }
   }
 }
