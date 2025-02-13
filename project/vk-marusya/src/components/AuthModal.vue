@@ -24,16 +24,12 @@
     isRegistration.value = !isRegistration.value;
   };
 
-  const toggleIsSuccessfully = (): void => {
-    isSuccessfully.value = !isSuccessfully.value;
-  };
-
   const addSuccessfully = (value: boolean): void => {
     isSuccessfully.value = value;
   }
 
-  const addLogin = (value: boolean): void => {
-    authModal.isVisible = !value;
+  const addLogin = (): void => {
+    authModal.closeModal();
   }
 </script>
 
@@ -50,7 +46,7 @@
       <p class="modal__text">Используйте вашу электронную почту для входа</p>
       <TheButton class="modal__btn modal__btn--successfuly"
         type="button" :title="'Войти'"
-        @click="toggleIsRegistration(), toggleIsSuccessfully()"
+        @click="toggleIsRegistration(), addSuccessfully(false)"
       />
     </div>
 

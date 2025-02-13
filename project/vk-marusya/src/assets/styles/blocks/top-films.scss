@@ -1,0 +1,56 @@
+.top-films {
+  margin: 0 0 120px;
+
+  &__title {
+    margin: 0 0 64px;
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px 40px;
+    text-align: balance;
+  }
+
+  &__item {
+    position: relative;
+  }
+
+  &__count {
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 24px;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    color: $color-slate-blue;
+    background-color: $color-default-white;
+    border-radius: 50px;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  &__link {
+    display: flex;
+    width: 224px;
+    height: 336px;
+    background-color: $color-eclipse;
+    border-radius: 16px;
+    box-shadow: 0px 0px 80px rgba($color-default-white, 0.33);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: box-shadow $transition-300;
+
+    @include hover-focus {
+      outline: none;
+      box-shadow: 0px 0px 80px rgba($color-magenta, 0.33);
+    }
+  }
+}
+

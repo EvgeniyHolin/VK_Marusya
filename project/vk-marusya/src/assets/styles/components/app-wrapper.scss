@@ -1,10 +1,14 @@
 .app-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  
   &--shadow {
     position: relative;
 
     &::before {
       content: "";
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       display: block;
