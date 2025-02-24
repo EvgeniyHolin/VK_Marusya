@@ -1,0 +1,93 @@
+.film-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 64px 40px;
+  $root: &;
+
+  &__item {
+    position: relative;
+  }
+
+  &__count {
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 24px;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    color: $color-slate-blue;
+    background-color: $color-default-white;
+    border-radius: 50px;
+    user-select: none;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  &__link {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 224px;
+    height: 336px;
+    background-color: $color-eclipse;
+    border-radius: 16px;
+    box-shadow: 0px 0px 80px rgba($color-default-white, 0.33);
+    overflow: hidden;
+    transition: box-shadow $transition-300;
+
+    @include hover-focus {
+      outline: none;
+      box-shadow: 0px 0px 80px rgba($color-magenta, 0.33);
+
+      & + #{$root}__delete {
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+  }
+
+  &__delete {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    display: flex;
+    width: 40px;
+    height: 40px;
+    background-color: $color-default-white;
+    border-radius: 50px;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $transition-300, background-color $transition-300;
+
+    @include hover-focus {
+      opacity: 1;
+      pointer-events: all;
+      background-color: $color-east-bay;
+    }
+
+    &::after,
+    &::before {
+      content: "";
+      position: absolute;
+      display: block;
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 2px;
+      background-color: $color-default-black;
+      transform: translate(-50%, -50%) rotate(45deg);
+      pointer-events: none;
+    }
+
+    &::before {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+}
+

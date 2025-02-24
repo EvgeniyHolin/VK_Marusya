@@ -1,8 +1,8 @@
 const addErrorClass = (field: Element | null): void => {
   if (field) {
-    const wrapper = field.closest('.user-form__input')
-    if (wrapper) {
-      wrapper.classList.add('error')
+    const userInput = field.closest('.user-form__input')
+    if (userInput) {
+      userInput.classList.add('error')
     }
   }
 };

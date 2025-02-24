@@ -1,0 +1,51 @@
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  &__point {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    border-radius: 50px;
+    background-color: rgba($color-default-white, 0.5);
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__label {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  &__value {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+  }
+
+  &__link {
+    width: 262px;
+  }
+}

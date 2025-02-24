@@ -3,6 +3,7 @@
   import Container from './TheContainer.vue';
   import { onMounted, ref } from 'vue';
   import FilmCard from './FilmCard.vue';
+  import { useIsFavoriteStore } from '@/stores/IsFavorite';
 
   const movie = ref({
     id: '',
@@ -16,42 +17,29 @@
     trailerUrl: ''
   });
 
-  const formatRating = (rating: string): string => {
-    return `${Number(rating).toFixed(1)}`
+  const favoriteMovies = ref([]);
+  const isFavorite = useIsFavoriteStore();
+
+  const getRandomFilm = async (): Promise<void> => {
+    await axios.get('https://cinemaguide.skillbox.cc/movie/random')
+      .then(async response => {
+        movie.value = response.data;
+
+        await axios.get('https://cinemaguide.skillbox.cc/favorites', { withCredentials: true })
+          .then(response => {
+            favoriteMovies.value = response.data;
+
+            const movieExist = favoriteMovies.value.some(item => item.id === Number(movie.value.id))
+            if (movieExist) {
+              isFavorite.isFavorite = true;
+            } else {
+              isFavorite.isFavorite = false;
+            }
+          })
+      })
   };
 
-  const formatRuntime = (time: string): string => {
-    return `${Math.floor(+time / 60)} ч ${+time % 60} мин`
-  }
-
-  const formatGenre = (genres: Array<string>): string => {
-    return genres[0];
-  };
-
-  const formatDescr = (descr: string): string => {
-    if (descr.length > 200) {
-      return descr.slice(0, 200) + '...';
-    };
-
-    return descr;
-  }
-
-  const getData = async () => {
-    try {
-      const response = await axios.get('https://cinemaguide.skillbox.cc/movie/random');
-      return response.data;
-    } catch {
-      return [];
-    }
-  };
-
-  const getRandomFilm = async () => {
-    movie.value = await getData();
-  };
-
-  onMounted(async () => {
-    getRandomFilm()
-  });
+  onMounted(getRandomFilm);
 </script>
 
 <template>
@@ -60,14 +48,15 @@
       <div class="hero__wrapper">
         <FilmCard
           :id="movie.id"
-          :rating="formatRating(movie.tmdbRating)"
+          :rating="movie.tmdbRating"
           :release="movie.releaseYear"
-          :genre="formatGenre(movie.genres)"
-          :runtime="formatRuntime(movie.runtime)"
+          :genre="movie.genres"
+          :runtime="movie.runtime"
           :title="movie.title"
-          :description="formatDescr(movie.plot)"
-          :hero="true"
+          :description="movie.plot"
+          :hero=true
           :image-path="movie.backdropUrl"
+          :trailer-url="movie.trailerUrl"
           @get-new-film="getRandomFilm"
         />
       </div>

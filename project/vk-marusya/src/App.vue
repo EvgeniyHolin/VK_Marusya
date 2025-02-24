@@ -1,19 +1,19 @@
 <script setup lang="ts">
   import { RouterView } from 'vue-router';
   import TheHeader from './components/TheHeader.vue';
-  import AuthModal from './components/AuthModal.vue';
-  import { useAuthModalStore } from '@/stores/AuthModal';
+  import Modal from './components/TheModal.vue';
+  import { useModalStore } from '@/stores/TheModal';
   import TheFooter from './components/TheFooter.vue';
 
-  const authModal = useAuthModalStore();
+  const modal = useModalStore();
 </script>
 
 <template>
-  <div :class="!authModal.isVisible ? 'app-wrapper' : 'app-wrapper app-wrapper--shadow'">
+  <div :class="!(modal.isAuth || modal.isTrailer) ? 'app-wrapper' : 'app-wrapper app-wrapper--shadow'">
     <TheHeader />
 
     <transition name="fade">
-      <AuthModal v-if="authModal.isVisible"/>
+      <Modal v-if="modal.isAuth"/>
     </transition>
 
     <router-view v-slot="{ Component }">

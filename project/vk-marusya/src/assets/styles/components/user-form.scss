@@ -9,23 +9,13 @@
     color: $color-default-black;
     border: 1px solid rgba($color-default-black, 0.4);
     background-color: $color-transparent;
-
-    &::placeholder {
-      opacity: 0.4;
-    }
   }
 
-  &__icon {
+  &__input-icon {
     color: $color-default-black;
-    opacity: 0.4;
   }
 
   &__submit {
     margin: 12px 0 0;
-  }
-
-  &__error {
-    max-width: 340px;
-    color: $color-salmon;
   }
 }

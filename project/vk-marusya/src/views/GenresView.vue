@@ -8,15 +8,13 @@
   const getData = async () => {
     try {
       const response = await axios.get('https://cinemaguide.skillbox.cc/movie/genres');
-      return response.data;
+      genres.value = response.data;
     } catch {
       return [];
     }
   };
 
-  onMounted(async () => {
-    genres.value = await getData();
-  });
+  onMounted(getData);
 </script>
 
 <template>
