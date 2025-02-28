@@ -1,7 +1,7 @@
 .error {
   border-color: $color-salmon;
 
-  & svg {
+  & + .user-form__input-icon {
     color: $color-salmon;
     opacity: 1;
   }

@@ -119,8 +119,7 @@
       await axios.post('https://cinemaguide.skillbox.cc/auth/login', {
         email: formData.email,
         password: formData.password
-      }, { withCredentials: true }).then(response => {
-          console.log('Статус авторизации:', response.status);
+      }, { withCredentials: true }).then(() => {
           openUserSession();
           errorData.value = false;
           handleSubmit();
@@ -141,7 +140,9 @@
 <template>
   <form class="user-form" method="post" @submit.prevent="isRegistration ? registerUser() : authUser()">
     <CustomInput v-for="field in fields" :key="field.id"
-      class="user-form__input"
+      class="user-form__wrapper"
+      input-class="user-form__input"
+      icon-class="user-form__input-icon"
       :type-val="field.type"
       :placeholder="field.placeholder"
       :filed-name="field.name"
@@ -156,6 +157,6 @@
     <span class="user-form__error" v-if="userExist">Пользователь с такой почтой уже существует</span>
     <span class="user-form__error" v-if="errorData">Неверные данные для входа</span>
 
-    <TheButton class="user-form__submit" type="submit" :title="buttonTitle"/>
+    <TheButton class="user-form__submit" type="submit" :title="buttonTitle" />
   </form>
 </template>

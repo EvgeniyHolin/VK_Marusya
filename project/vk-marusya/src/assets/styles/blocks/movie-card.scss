@@ -1,0 +1,40 @@
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  &__title {
+    margin: 0 0 64px;
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__item {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__inner {
+    display: flex;
+    gap: 8px;
+    width: 320px;
+  }
+
+  &__key {
+    width: max-content;
+  }
+
+  &__line {
+    display: block;
+    width: calc(320px - var(--key-width));
+    flex-grow: 1;
+    height: 80%;
+    border-bottom: 1px dashed rgba($color-default-white, 0.5);
+  }
+}

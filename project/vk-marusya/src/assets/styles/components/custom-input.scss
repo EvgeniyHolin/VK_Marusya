@@ -1,9 +1,7 @@
 .custom-input {
   position: relative;
   flex-grow: 1;
-  padding: 11px 16px 11px 52px;
-  border-radius: 8px;
-  background-color: $color-montana;
+  $root: &;
 
   &__icon {
     position: absolute;
@@ -11,17 +9,38 @@
     left: 20px;
     transform: translateY(-45%);
     opacity: 0.5;
+    color: $color-default-white;
+    opacity: 0.4;
+    transition: color $transition-300, opacity $transition-300;
+    pointer-events: none;
   }
 
   &__input {
+    position: relative;
+    padding: 10px 15px 10px 51px;
     line-height: 24px;
     width: 100%;
     color: inherit;
-    border: none;
-    background-color: $color-transparent;
+    border: 1px solid $color-transparent;
+    border-radius: 8px;
+    background-color: $color-montana;
+    transition: border-color $transition-300;
 
-    @include focus {
+    @include hover-focus {
       outline: none;
+
+      &:not(.error) {
+        border-color: $color-perano;
+      }
+
+      &:not(.error) + #{$root}__icon {
+        color: $color-perano;
+        opacity: 1;
+      }
+    }
+
+    &::placeholder {
+      opacity: 1;
     }
   }
 }

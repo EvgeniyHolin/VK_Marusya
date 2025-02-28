@@ -1,9 +1,4 @@
 .modal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-  padding: 64px 40px 34px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -11,7 +6,11 @@
   max-width: max-content;
   background-color: $color-default-white;
   border-radius: 24px;
-  z-index: 10;
+  z-index: 30;
+
+  &--trailer {
+    border-radius: 0;
+  }
 
   &__close {
     display: flex;
@@ -40,53 +39,6 @@
         background-color: inherit;
         transform: rotate(90deg);
       }
-    }
-  }
-
-  &__logo {
-    margin: 0 0 16px;
-  }
-
-  &__form {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    align-items: center;
-  }
-
-  &__successfully {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    align-items: center;
-    max-width: 340px;
-  }
-
-  &__title {
-    margin: 0;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 32px;
-    color: $color-default-black;
-    text-align: center;
-  }
-
-  &__text {
-    margin: 0;
-    color: $color-default-black;
-    max-width: 80%;
-    text-align: center;
-  }
-
-  &__btn {
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 24px;
-    color: $color-default-black;
-
-    &--successfuly {
-      width: 100%;
-      color: $color-default-white;
     }
   }
 }

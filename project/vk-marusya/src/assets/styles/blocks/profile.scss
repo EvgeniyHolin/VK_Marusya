@@ -1,0 +1,38 @@
+.profile {
+  padding: 32px 0 0;
+
+  &__title {
+    margin: 0 0 64px;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 56px;
+  }
+
+  &__intaraction {
+    display: flex;
+    gap: 64px;
+    margin: 0 0 72px;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color $transition-300;
+
+    @include hover-focus {
+      outline: none;
+      color: $color-perano;
+    }
+  }
+
+  &__link-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__link-text {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}

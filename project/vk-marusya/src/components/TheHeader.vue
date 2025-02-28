@@ -5,18 +5,18 @@
   import { RouterLink } from 'vue-router';
   import mainNavItems from '@/data/main-nav';
   import type NavLink from '@/types/NavLinkType';
-  import { useAuthModalStore } from '@/stores/AuthModal';
+  import { useModalStore } from '@/stores/TheModal';
   import { useAuthUserStore } from '@/stores/AuthUser';
   import { onMounted } from 'vue';
   import getSessionData from '@/scripts/getSessionData';
 
-  const authModal = useAuthModalStore();
+  const modal = useModalStore();
   const userAuth = useAuthUserStore()
 
   const homePage: NavLink = mainNavItems.filter(el => el.name === 'home')[0];
 
   const openModal = () => {
-    authModal.openModal();
+    modal.openAuthModal();
   };
 
   const getUserData = () => {
@@ -27,9 +27,7 @@
     }
   }
 
-  onMounted(() => {
-    getUserData();
-  });
+  onMounted(getUserData);
 </script>
 
 <template>

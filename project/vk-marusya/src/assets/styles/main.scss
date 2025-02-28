@@ -15,10 +15,13 @@
 @import './components/container';
 @import './components/btn';
 @import './components/active-link';
+@import './components/film-list';
 @import './components/app-wrapper';
 @import './components/header';
 @import './components/main-nav';
 @import './components/custom-input';
+@import './components/trailer-modal';
+@import './components/auth-modal';
 @import './components/user-form';
 @import './components/footer';
 @import './components/error';
@@ -30,6 +33,9 @@
 @import './blocks/modal';
 @import './blocks/hero';
 @import './blocks/top-films';
+@import './blocks/profile';
+@import './blocks/profile-info';
+@import './blocks/movie-card';
 
 // Animations
 // ---------------------------------------

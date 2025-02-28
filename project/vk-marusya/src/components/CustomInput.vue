@@ -8,7 +8,9 @@
       type: String
     },
     typeVal: String,
-    filedName: String
+    filedName: String,
+    inputClass: String,
+    iconClass: String
   });
 
   const emit = defineEmits(['getValue']);
@@ -20,15 +22,16 @@
 
 <template>
   <div class="custom-input">
-    <div class="custom-input__icon">
-      <slot name="icon"></slot>
-    </div>
     <input class="custom-input__input"
+      :class="inputClass"
       :type="props.typeVal"
       :placeholder="`${props.placeholder}`"
       :name="`${props.filedName}`"
       v-model="formData[ props.filedName ]"
       @change="setValue(filedName, formData[ props.filedName ])"
     >
+    <div class="custom-input__icon" :class="iconClass">
+      <slot name="icon"></slot>
+    </div>
   </div>
 </template>
