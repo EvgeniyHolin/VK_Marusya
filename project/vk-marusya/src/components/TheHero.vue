@@ -14,7 +14,7 @@
     title: '',
     plot: '',
     backdropUrl: '',
-    trailerUrl: ''
+    trailerYouTubeId: ''
   });
 
   const favoriteMovies = ref([]);
@@ -56,7 +56,7 @@
           :description="movie.plot"
           :hero=true
           :image-path="movie.backdropUrl"
-          :trailer-url="movie.trailerUrl"
+          :trailer-you-tube-id="movie.trailerYouTubeId"
           @get-new-film="getRandomFilm"
         />
       </div>

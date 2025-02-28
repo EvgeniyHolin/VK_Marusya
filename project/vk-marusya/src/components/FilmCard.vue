@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-  import { onMounted, ref } from 'vue';
+  import { computed, onMounted, ref } from 'vue';
   import IconFavorite from '@/assets/icons/icon-favorite.svg';
   import IconAddFavorite from '@/assets/icons/icon-add-favorite.svg';
   import IconReplace from '@/assets/icons/icon-replace.svg';
   import IconStar from '@/assets/icons/icon-star.svg';
   import ThePicture from './ThePicture.vue';
   import TheButton from './TheButton.vue';
+  import TheTrailer from './TheTrailer.vue';
   import { useAuthUserStore } from '@/stores/AuthUser';
   import { useModalStore } from '@/stores/TheModal';
   import { useIsFavoriteStore } from '@/stores/IsFavorite';
@@ -41,7 +42,7 @@
     imagePath: {
       type: String
     },
-    trailerUrl: {
+    trailerYouTubeId: {
       type: String
     }
   });
@@ -102,7 +103,13 @@
 
   const addFavorite = async (): Promise<void> => {
     if (userAuth.isAuth) {
-      await axios.post('https://cinemaguide.skillbox.cc/favorites', {id: String(props.id)}, {withCredentials: true})
+      const movieExist = favoriteMovies.value.some(item => item.id === Number(props.id));
+      if (movieExist) {
+        await axios.delete(`https://cinemaguide.skillbox.cc/favorites/${props.id}`, { withCredentials: true })
+        removeIsFavorite();
+        getFavoriteMovies();
+      } else {
+        await axios.post('https://cinemaguide.skillbox.cc/favorites', {id: String(props.id)}, {withCredentials: true})
         .then(async () => {
           await getFavoriteMovies();
 
@@ -110,10 +117,10 @@
             isFavorite.isFavorite = true;
           }
         })
-        .catch(async () => {
-          await axios.delete(`https://cinemaguide.skillbox.cc/favorites/${props.id}`, { withCredentials: true })
-          removeIsFavorite();
+        .catch(error => {
+          console.log(error);
         })
+      }
     } else {
       modal.openAuthModal();
     }
@@ -172,11 +179,7 @@
     <transition name="fade" mode="out-in">
           <the-modal class="modal--trailer" v-if="modal.isTrailer">
             <template v-slot:trailer>
-              <div class="film-card__trailer">
-                <video class="film-card__video" width="960" height="540" controls>
-                  <source :src="trailerUrl" type="video/mp4">
-                </video>
-              </div>
+              <TheTrailer :trailerId="trailerYouTubeId" />
             </template>
           </the-modal>
     </transition>

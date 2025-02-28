@@ -23,7 +23,7 @@
     title: '',
     plot: '',
     backdropUrl: '',
-    trailerUrl: '',
+    trailerYouTubeId: '',
     language: '',
     budget: '',
     revenue: '',
@@ -89,7 +89,7 @@
         :description="movie.plot"
         :hero=false
         :image-path="movie.backdropUrl"
-        :trailer-url="movie.trailerUrl"
+        :trailer-you-tube-id="movie.trailerYouTubeId"
       />
       <div class="movie-card__wrapper">
         <h2 class="movie-card__title">О&nbsp;фильме</h2>
