@@ -1,0 +1,15 @@
+.trailer {
+  position: relative;
+  display: flex;
+  width: 960px;
+  height: 540px;
+  background-color: rgba($color-default-white, 0.5);
+  pointer-events: auto;
+
+  &__video {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+}
+
