@@ -22,7 +22,7 @@
 </script>
 
 <template>
-  <main class="main">
+  <div class="main-page">
     <Hero />
 
     <section class="top-films">
@@ -31,5 +31,5 @@
         <FilmList :films="topFilms" :isCounter="true" />
       </Container>
     </section>
-  </main>
+  </div>
 </template>

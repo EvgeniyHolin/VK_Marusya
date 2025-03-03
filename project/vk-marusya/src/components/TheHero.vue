@@ -4,6 +4,7 @@
   import { onMounted, ref } from 'vue';
   import FilmCard from './FilmCard.vue';
   import { useIsFavoriteStore } from '@/stores/IsFavorite';
+  import { useAuthUserStore } from '@/stores/AuthUser';
 
   const movie = ref({
     id: '',
@@ -13,19 +14,22 @@
     runtime: '',
     title: '',
     plot: '',
+    posterUrl: '',
     backdropUrl: '',
     trailerYouTubeId: ''
   });
 
   const favoriteMovies = ref([]);
   const isFavorite = useIsFavoriteStore();
+  const userAuth = useAuthUserStore();
 
   const getRandomFilm = async (): Promise<void> => {
     await axios.get('https://cinemaguide.skillbox.cc/movie/random')
       .then(async response => {
         movie.value = response.data;
 
-        await axios.get('https://cinemaguide.skillbox.cc/favorites', { withCredentials: true })
+        if (userAuth.isAuth) {
+          await axios.get('https://cinemaguide.skillbox.cc/favorites', { withCredentials: true })
           .then(response => {
             favoriteMovies.value = response.data;
 
@@ -36,6 +40,7 @@
               isFavorite.isFavorite = false;
             }
           })
+        }
       })
   };
 
@@ -55,7 +60,7 @@
           :title="movie.title"
           :description="movie.plot"
           :hero=true
-          :image-path="movie.backdropUrl"
+          :image-path="movie.backdropUrl ? movie.backdropUrl : movie.posterUrl"
           :trailer-you-tube-id="movie.trailerYouTubeId"
           @get-new-film="getRandomFilm"
         />

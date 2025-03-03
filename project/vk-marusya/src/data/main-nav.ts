@@ -10,7 +10,7 @@ const mainNavItems: NavLink[] = [
   {
     id: 2,
     title: 'Жанры',
-    path: '/movie/genres',
+    path: '/movie',
     name: 'genres'
   }
 ];

@@ -4,7 +4,7 @@
   import { useRoute } from 'vue-router';
   import { onMounted, ref, computed } from 'vue';
   import axios from 'axios';
-  import movieInfo from '@/data/MovieInfo';
+  import movieInfo from '@/data/movie-info';
   import { useAuthUserStore } from '@/stores/AuthUser';
   import { useIsFavoriteStore } from '@/stores/IsFavorite';
 
@@ -22,6 +22,7 @@
     runtime: '',
     title: '',
     plot: '',
+    posterUrl: '',
     backdropUrl: '',
     trailerYouTubeId: '',
     language: '',
@@ -88,7 +89,7 @@
         :title="movie.title"
         :description="movie.plot"
         :hero=false
-        :image-path="movie.backdropUrl"
+        :image-path="movie.backdropUrl ? movie.backdropUrl : movie.posterUrl"
         :trailer-you-tube-id="movie.trailerYouTubeId"
       />
       <div class="movie-card__wrapper">

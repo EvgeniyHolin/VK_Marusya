@@ -1,10 +1,12 @@
 import HomeView from '@/views/HomeView.vue';
-import GenresView from '@/views/GenresView.vue';
+// import GenresView from '@/views/AllGenresView.vue';
 import ProfileView from '@/views/ProfileView.vue';
 import FavoriteView from '@/views/FavoriteView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import ProfileInfo from '@/views/ProfileInfo.vue';
 import MovieCard from '@/views/MovieCard.vue';
+import MovieWrapper from '@/views/MovieWrapper.vue';
+// import GenreView from '@/views/GenreView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,9 +35,9 @@ const router = createRouter({
       ]
     },
     {
-      path: '/movie/genres',
-      name: 'genres',
-      component: GenresView
+      path: '/movie',
+      name: 'movie',
+      component: MovieWrapper,
     },
     {
       path: '/movie/:id',

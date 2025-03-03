@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { computed, onMounted, ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import IconFavorite from '@/assets/icons/icon-favorite.svg';
   import IconAddFavorite from '@/assets/icons/icon-add-favorite.svg';
   import IconReplace from '@/assets/icons/icon-replace.svg';
@@ -13,6 +13,7 @@
   import axios from 'axios';
   import TheModal from './TheModal.vue';
   import { RouterLink } from 'vue-router';
+  import genresInfo from '@/data/genres-info';
 
   const props = defineProps({
     id: {
@@ -70,7 +71,7 @@
 
   const formatGenre = (genres: Array<string> | undefined): string => {
     if (genres) {
-      return genres[0];
+      return genresInfo.find(item => item.systemName === genres[0])?.renderName;
     }
     return '';
   };
@@ -151,7 +152,8 @@
           <span class="film-card__runtime">{{ formatRuntime(runtime) }}</span>
         </div>
         <h2 class="film-card__title">{{ title }}</h2>
-        <p class="film-card__descr">{{ formatDescr(description) }}</p>
+        <p class="film-card__descr" v-if="hero">{{ formatDescr(description) }}</p>
+        <p class="film-card__descr" v-else>{{ description }}</p>
       </div>
 
       <div class="film-card__action">
