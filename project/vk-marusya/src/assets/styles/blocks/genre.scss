@@ -1,0 +1,38 @@
+.genre {
+  padding: 32px 0 0;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    width: max-content;
+    transition: color $transition-300;
+
+    @include hover-focus {
+      outline: none;
+      color: $color-perano;
+    }
+  }
+
+  &__title-icon {
+    width: 13px;
+    height: 21px;
+  }
+
+  &__title-text {
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 56px;
+  }
+
+  &__btn {
+    align-self: center;
+    width: 218px;
+  }
+}
