@@ -1,19 +1,18 @@
 <script lang="ts" setup>
-  import { onMounted, ref } from 'vue';
+  import { onMounted, ref, watch } from 'vue';
   import IconFavorite from '@/assets/icons/icon-favorite.svg';
   import IconAddFavorite from '@/assets/icons/icon-add-favorite.svg';
   import IconReplace from '@/assets/icons/icon-replace.svg';
-  import IconStar from '@/assets/icons/icon-star.svg';
   import ThePicture from './ThePicture.vue';
   import TheButton from './TheButton.vue';
   import TheTrailer from './TheTrailer.vue';
+  import FilmInfo from './FilmInfo.vue';
   import { useAuthUserStore } from '@/stores/AuthUser';
   import { useModalStore } from '@/stores/TheModal';
   import { useIsFavoriteStore } from '@/stores/IsFavorite';
   import axios from 'axios';
   import TheModal from './TheModal.vue';
   import { RouterLink } from 'vue-router';
-  import genresInfo from '@/data/genres-info';
 
   const props = defineProps({
     id: {
@@ -54,27 +53,6 @@
   const favoriteMovies = ref([]);
   const isFavorite = useIsFavoriteStore();
   const hero = ref(props.hero);
-
-  const formatRating = ( rating: string | undefined ): string => {
-    if (rating) {
-      return `${Number(rating).toFixed(1)}`
-    }
-    return '';
-  };
-
-  const formatRuntime = ( time: string | undefined ): string => {
-    if (time) {
-      return `${Math.floor(+time / 60)} ч ${+time % 60} мин`;
-    }
-    return '';
-  }
-
-  const formatGenre = (genres: Array<string> | undefined): string => {
-    if (genres) {
-      return genresInfo.find(item => item.systemName === genres[0])?.renderName;
-    }
-    return '';
-  };
 
   const formatDescr = (descr: string | undefined): string => {
     if (descr) {
@@ -135,6 +113,18 @@
     modal.openTrailerModal();
   };
 
+  watch(() => userAuth.isAuth, (newVal) => {
+    getFavoriteMovies();
+    if (newVal) {
+      const movieExist = favoriteMovies.value.some(item => item.id === Number(props.id));
+      if (movieExist) {
+        isFavorite.isFavorite = true;
+      }
+    } else {
+      isFavorite.isFavorite = false;
+    }
+  })
+
   onMounted(getFavoriteMovies);
 </script>
 
@@ -142,25 +132,22 @@
   <div class="film-card">
     <div class="film-card__wrapper">
       <div class="film-card__content">
-        <div class="film-card__info">
-          <div class="film-card__rating">
-            <IconStar class="film-card__rating-icon" />
-            <span class="film-card__rating-num">{{ formatRating(rating) }}</span>
-          </div>
-          <span class="film-card__release">{{ release }}</span>
-          <span class="film-card__genre">{{ formatGenre(genre) }}</span>
-          <span class="film-card__runtime">{{ formatRuntime(runtime) }}</span>
-        </div>
+        <FilmInfo
+          :rating="rating"
+          :release="release"
+          :genre="genre"
+          :runtime="runtime"
+        />
         <h2 class="film-card__title">{{ title }}</h2>
         <p class="film-card__descr" v-if="hero">{{ formatDescr(description) }}</p>
         <p class="film-card__descr" v-else>{{ description }}</p>
       </div>
 
       <div class="film-card__action">
-        <TheButton class="film-card__btn" title="Трейлер" @click="openTrailer" />
-        <router-link class="btn film-card__btn film-card__btn--grey" v-if="hero" :to="`movie/${id}`" tag="button">О&nbsp;фильме</router-link>
+        <TheButton class="film-card__btn film-card__btn--trailer" title="Трейлер" @click="openTrailer" />
+        <router-link class="btn film-card__btn film-card__btn--about-film film-card__btn--grey" v-if="hero" :to="`movie/${id}`" tag="button">О&nbsp;фильме</router-link>
         <TheButton class="film-card__btn film-card__btn--grey film-card__btn--sm" id="favorite" @click="addFavorite()">
-          <IconAddFavorite class="film-card__icon" v-if="isFavorite.isFavorite" />
+          <IconAddFavorite class="film-card__icon" v-if="isFavorite.isFavorite && userAuth.isAuth" />
           <IconFavorite class="film-card__icon" v-else />
         </TheButton>
         <TheButton class="film-card__btn film-card__btn--grey film-card__btn--sm" v-if="hero" @click="getNewFilm(), removeIsFavorite()">

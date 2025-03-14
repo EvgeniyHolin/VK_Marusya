@@ -5,6 +5,10 @@
     display: flex;
     justify-content: flex-end;
     padding: 40px 0;
+
+    @include vp-767 {
+      justify-content: flex-start;
+    }
   }
 
   &__list {
@@ -24,6 +28,11 @@
     &-icon {
       width: 36px;
       height: 36px;
+
+      @include vp-767 {
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 }

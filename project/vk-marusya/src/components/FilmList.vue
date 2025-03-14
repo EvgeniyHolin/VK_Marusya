@@ -34,16 +34,19 @@
 </script>
 
 <template>
-  <ul class="film-list">
-    <li class="film-list__item" v-for="(film, index) in films" :key="index">
-      <span class="film-list__count" v-if="isCounter">{{ index + 1 }}</span>
-      <router-link class="film-list__link" tag="a" :to="`/movie/${film.id}`">
-        <ThePicture
-          class="film-list__img"
-          :img-path="film.posterUrl"
-        />
-      </router-link>
-      <TheButton class="film-list__delete" tabindex="-1" v-if="!isCounter && !isGenre" @click="deleteMovie(film.id)" />
-    </li>
-  </ul>
+  <div class="film-list">
+    <ul class="film-list__list">
+      <li class="film-list__item" v-for="(film, index) in films" :key="index">
+        <span class="film-list__count" v-if="isCounter">{{ index + 1 }}</span>
+        <router-link class="film-list__link" tag="a" :to="`/movie/${film.id}`">
+          <ThePicture
+            class="film-list__img"
+            :img-path="film.posterUrl"
+          />
+        </router-link>
+        <TheButton class="film-list__delete" tabindex="-1" v-if="!isCounter && !isGenre" @click="deleteMovie(film.id)" />
+      </li>
+    </ul>
+  </div>
+
 </template>

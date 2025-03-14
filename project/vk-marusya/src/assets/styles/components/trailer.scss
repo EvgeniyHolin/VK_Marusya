@@ -6,6 +6,15 @@
   background-color: rgba($color-default-white, 0.5);
   pointer-events: auto;
 
+  @include vp-1023 {
+    width: 760px;
+    height: 430px;
+  }
+
+  @include vp-767 {
+    width: calc(100vw - 40px);
+  }
+
   &__video {
     width: 100%;
     height: 100%;

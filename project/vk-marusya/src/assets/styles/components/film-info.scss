@@ -1,0 +1,93 @@
+.film-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  $root: &;
+
+  @include vp-767 {
+    gap: 8px;
+  }
+
+  &__rating {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    background-color: $color-forest-green;
+    border-radius: 16px;
+
+    @include vp-767 {
+      padding: 2px 8px;
+    }
+
+    &-icon {
+      width: 16px;
+      height: 16px;
+
+      @include vp-1278 {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    &-num {
+      font-size: 18px;
+      line-height: 24px;
+      font-weight: 700;
+
+      @include vp-1278 {
+        font-size: 14px;
+        line-height: 20px;
+      }
+    }
+  }
+
+  &__release,
+  &__genre,
+  &__runtime {
+    font-size: 18px;
+    line-height: 24px;
+    color: rgba($color-default-white, 0.7);
+    
+    @include vp-1278 {
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    @include vp-767 {
+      font-size: 13px;
+      line-height: 19px;
+    }
+  }
+
+  &--search {
+    gap: 12px;
+
+    @include vp-767 {
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #{$root}__rating {
+      padding: 2px 8px;
+
+      &-icon {
+        width: 10px;
+        height: 10px;
+      }
+
+      &-num {
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+
+    #{$root}__release,
+    #{$root}__genre,
+    #{$root}__runtime {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+}

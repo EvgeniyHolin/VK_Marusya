@@ -5,13 +5,13 @@ const mainNavItems: NavLink[] = [
     id: 1,
     title: 'Главная',
     path: '/',
-    name: 'home'
+    name: 'home',
   },
   {
     id: 2,
     title: 'Жанры',
     path: '/movie',
-    name: 'genres'
+    name: 'genres',
   }
 ];
 

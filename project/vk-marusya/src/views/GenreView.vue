@@ -2,7 +2,7 @@
   import Container from '@/components/TheContainer.vue';
   import { RouterLink, useRoute } from 'vue-router';
   import genresInfo from '@/data/genres-info';
-  import { computed, onMounted, ref } from 'vue';
+  import { computed, onMounted, onUnmounted, ref } from 'vue';
   import IconPrevArrow from '@/assets/icons/icon-prev-arrow.svg';
   import axios from 'axios';
   import FilmList from '@/components/FilmList.vue';
@@ -11,7 +11,7 @@
   const route = useRoute()
   const genre = route.query.genre;
   const movies = ref([]);
-  const count = 10;
+  const count = ref(10);
   const currentPage = ref(1);
   const hasMore = ref(true);
 
@@ -20,9 +20,9 @@
   });
 
   const getMovies = async () => {
-    await axios.get(`https://cinemaguide.skillbox.cc/movie?genre=${genre}&count=${count}&page=${currentPage.value}`)
+    await axios.get(`https://cinemaguide.skillbox.cc/movie?genre=${genre}&count=${count.value}&page=${currentPage.value}`)
       .then(response => {
-        if (response.data.length < count) {
+        if (response.data.length < count.value) {
           hasMore.value = false;
         }
 
@@ -41,7 +41,23 @@
     }
   }
 
-  onMounted(getMovies);
+  const handleCount = () => {
+    if (window.innerWidth < 768) {
+      count.value = 5;
+    } else {
+      count.value = 10;
+    }
+  };
+
+  onMounted(() => {
+    handleCount();
+    getMovies();
+    window.addEventListener('resize', handleCount);
+  });
+
+  onUnmounted(() => {
+    window.removeEventListener('resize', handleCount);
+  });
 </script>
 
 <template>
@@ -53,7 +69,7 @@
           <span class="genre__title-text">{{ renderNameGenre }}</span>
         </router-link>
 
-        <FilmList :films="movies" :is-genre="true"/>
+        <FilmList class="film-list--genre" :films="movies" :is-genre="true"/>
 
         <TheButton class="genre__btn" v-if="hasMore" @click="loadMore">Показать ещё</TheButton>
       </div>

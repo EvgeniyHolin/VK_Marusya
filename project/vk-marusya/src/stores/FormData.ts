@@ -8,6 +8,7 @@ export const useFormDataStorage = defineStore('RegFormData', () => {
   const surname = ref('');
   const password = ref('');
   const repeatPassword = ref('');
+  const search = ref('');
 
   const cleanFormData = (): void => {
     email.value = '';
@@ -15,6 +16,7 @@ export const useFormDataStorage = defineStore('RegFormData', () => {
     surname.value = '';
     password.value = '';
     repeatPassword.value = '';
+    search.value = '';
   };
 
   return {
@@ -23,6 +25,7 @@ export const useFormDataStorage = defineStore('RegFormData', () => {
     surname,
     password,
     repeatPassword,
+    search,
     cleanFormData
   }
 })

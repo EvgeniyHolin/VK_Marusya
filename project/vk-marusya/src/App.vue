@@ -9,7 +9,7 @@
 </script>
 
 <template>
-  <div :class="!(modal.isAuth || modal.isTrailer) ? 'app-wrapper' : 'app-wrapper app-wrapper--shadow'">
+  <div :class="!(modal.isAuth || modal.isTrailer || modal.isModileSearch) ? 'app-wrapper' : 'app-wrapper app-wrapper--shadow'">
     <TheHeader />
 
     <transition name="fade">

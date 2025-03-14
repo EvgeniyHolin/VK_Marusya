@@ -9,6 +9,7 @@
   import { useAuthUserStore } from '@/stores/AuthUser';
   import { onMounted } from 'vue';
   import getSessionData from '@/scripts/getSessionData';
+  import IconPerson from '@/assets/icons/icon-person.svg'
 
   const modal = useModalStore();
   const userAuth = useAuthUserStore()
@@ -44,6 +45,13 @@
           {{ userAuth.data.name }}
         </router-link>
         <button v-else class="header__btn" type="button" @click="openModal">Войти</button>
+
+        <router-link v-if="userAuth.isAuth" class="header__btn header__btn--mobile" tag="a" to="/profile" active-class="active-link">
+          <IconPerson />
+        </router-link>
+        <button v-else class="header__btn header__btn--mobile" type="button" @click="openModal">
+          <IconPerson />
+        </button>
       </div>
     </TheContainer>
   </header>

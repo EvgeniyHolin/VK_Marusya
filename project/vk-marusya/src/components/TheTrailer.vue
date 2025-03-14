@@ -15,6 +15,5 @@
 <template>
   <div class="trailer">
     <iframe class="trailer__video" :src="trailerUrl" width="960" height="540" allowfullscreen></iframe>
-    <div class="trailer__subblock"></div>
   </div>
 </template>

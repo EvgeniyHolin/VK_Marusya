@@ -4,6 +4,7 @@ import { defineStore } from 'pinia';
 export const useModalStore = defineStore('Modal', () => {
   const isAuth = ref(false);
   const isTrailer = ref(false);
+  const isModileSearch = ref(false);
   const body = document.querySelector('body');
 
   const openAuthModal = (): void => {
@@ -34,12 +35,29 @@ export const useModalStore = defineStore('Modal', () => {
     }
   };
 
+  const openMobileSearch = (): void => {
+    isModileSearch.value = true;
+    if(body) {
+      body.style.overflow = 'hidden';
+    }
+  };
+
+  const closeMobileSearch = (): void => {
+    isModileSearch.value = false;
+    if(body) {
+      body.style.overflow = 'visible';
+    }
+  };
+
   return {
     isAuth,
     isTrailer,
+    isModileSearch,
     openAuthModal,
     closeAuthModal,
     openTrailerModal,
-    closeTrailerModal
+    closeTrailerModal,
+    openMobileSearch,
+    closeMobileSearch
   }
 })

@@ -3,10 +3,27 @@
   align-items: center;
   flex-grow: 1;
   gap: 40px;
+
+  @include vp-767 {
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  @include vp-767 {
+    flex-grow: 0;
+  }
  
   &__list {
     display: flex;
     gap: 40px;
+
+    @include vp-1278 {
+      gap: 20px;
+    }
+
+    @include vp-767 {
+      display: none;
+    }
   }
 
   &__link {
@@ -17,6 +34,42 @@
     @include hover-focus {
       outline: none;
       color: $color-perano;
+    }
+
+    @include vp-1278 {
+      font-size: 20px;
+      line-height: 28px;
+    }
+
+    &--mobile {
+      display: none;
+
+      @include vp-767 {
+        display: flex;
+      }
+    }
+  }
+
+  &__search {
+    position: relative;
+    width: 100%;
+
+    @include vp-767 {
+      width: max-content;
+    }
+  }
+
+  &__search-btn {
+    display: none;
+    transition: color $transition-300;
+
+    @include vp-767 {
+      display: flex;
+
+      @include hover-focus {
+        outline: none;
+        color: $color-perano;
+      }
     }
   }
 }

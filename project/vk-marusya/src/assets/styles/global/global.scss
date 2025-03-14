@@ -30,6 +30,7 @@ body {
   display: flex;
   flex-direction: column;
   background: $main-gradient;
+  background-repeat: no-repeat;
 }
 
 #app {
@@ -147,4 +148,8 @@ button,
   border: none;
   background-color: $color-transparent;
   cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
 }

@@ -5,10 +5,20 @@
   gap: 20px;
   $root: &;
 
+  @include vp-1023 {
+    justify-self: center;
+    flex-direction: column-reverse;
+    width: 100%;
+  }
+
   &__wrapper {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    @include vp-1023 {
+      max-width: 583px;
+    }
   }
 
   &__content {
@@ -23,40 +33,27 @@
     gap: 16px;
   }
 
-  &__rating {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 12px;
-    background-color: $color-forest-green;
-    border-radius: 16px;
-
-    &-icon {
-      width: 16px;
-      height: 16px;
-    }
-
-    &-num {
-      font-size: 18px;
-      line-height: 24px;
-      font-weight: 700;
-    }
-  }
-
-  &__release,
-  &__genre,
-  &__runtime {
-    font-size: 18px;
-    line-height: 24px;
-    color: rgba($color-default-white, 0.7);
-  }
-
   &__title {
     margin: 0;
     min-height: 112px;
     font-size: 48px;
     line-height: 56px;
+
+    @include vp-1278 {
+      min-height: unset;
+      font-size: 38px;
+      line-height: 46px;
+    }
+
+    @include vp-1110 {
+      font-size: 34px;
+      line-height: 42px;
+    }
+
+    @include vp-767 {
+      font-size: 24px;
+      line-height: 32px;
+    }
   }
 
   &__descr {
@@ -65,12 +62,29 @@
     font-size: 24px;
     line-height: 32px;
     color: rgba($color-default-white, 0.7);
+
+    @include vp-1278 {
+      min-height: unset;
+      font-size: 20px;
+      line-height: 28px;
+    }
+
+    @include vp-1110 {
+      font-size: 16px;
+      line-height: 24px;
+    }
   }
 
   &__action {
     display: flex;
     align-items: center;
     gap: 16px;
+
+    @include vp-1110 {
+      display: grid;
+      grid-template-columns: 1fr 68px 68px;
+      grid-template-rows: repeat(2, 52px);
+    }
   }
 
   &__btn {
@@ -80,9 +94,17 @@
     padding: 15px;
     width: 171px;
 
+    @include vp-1278 {
+      width: 141px;
+    }
+
     &--grey {
       background-color: $color-montana;
       width: 183px;
+
+      @include vp-1278 {
+        width: 153px;
+      }
       
       @include hover-focus {
         background-color: $color-black-pearl;
@@ -98,6 +120,25 @@
           transform: scale(0.9);
         }
       }
+
+      @include vp-1110 {
+        grid-row: 2 / 3;
+      }
+    }
+
+    &--trailer {
+      @include vp-1110 {
+        grid-row: 1 / 2;
+        grid-column: span 3;
+        width: 100%;
+      }
+    }
+
+    &--about-film {
+      @include vp-1110 {
+        grid-row: 2 / 3;
+        width: 100%;
+      }
     }
   }
 
@@ -105,6 +146,11 @@
     width: 20px;
     height: 20px;
     transition: transform $transition-300;
+
+    @include vp-1278 {
+      width: 16px;
+      height: 16px;
+    }
   }
 
   &__inner {
@@ -114,11 +160,43 @@
     border-radius: 16px;
     background-color: $color-eclipse;
     overflow: hidden;
+
+    @include vp-1278 {
+      width: calc(680px - 10%);
+      height: 320px;
+    }
+
+    @include vp-767 {
+      width: 100%;
+      height: 260px;
+    }
   }
 
   &__img {
     width: 100%;
     height: 100%;
     object-position: center;
+  }
+
+  &--all {
+    #{$root}__action {
+      @include vp-1110 {
+        grid-template-columns: 1fr 68px;
+        grid-template-rows: 52px;
+      }
+    }
+
+    #{$root}__btn--trailer {
+      @include vp-1110 {
+        grid-column: 1 / 2;
+      }
+    }
+
+    #{$root}__btn--sm {
+      @include vp-1110 {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+      }
+    }
   }
 }

@@ -20,4 +20,9 @@
     font-size: 15px;
     transform: scale(0.9);
   }
+
+  @media (max-width: 1278px) {
+    font-size: 14px;
+    line-height: 20px;
+  }
 }

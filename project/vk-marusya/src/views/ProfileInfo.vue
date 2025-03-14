@@ -1,10 +1,12 @@
 <script lang="ts" setup>
   import { useAuthUserStore } from '@/stores/AuthUser';
+  import { useIsFavoriteStore } from '@/stores/IsFavorite';
   import axios from 'axios';
   import { computed, onMounted, ref } from 'vue';
   import IconMail from '@/assets/icons/icon-mail.svg'
 
   const userAuth = useAuthUserStore();
+  const isFavorite = useIsFavoriteStore();
   const userData = ref({
     surname: '',
     name: '',
@@ -26,6 +28,7 @@
       .then(() => {
         sessionStorage.clear();
         userAuth.isAuth = false;
+        isFavorite.isFavorite = false;
       })
       .catch(error => {
         console.log(error);

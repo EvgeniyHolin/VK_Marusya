@@ -2,7 +2,7 @@
   import Container from '@/components/TheContainer.vue';
   import FilmCard from '@/components/FilmCard.vue';
   import { useRoute } from 'vue-router';
-  import { onMounted, ref, computed } from 'vue';
+  import { onMounted, ref, computed, watch } from 'vue';
   import axios from 'axios';
   import movieInfo from '@/data/movie-info';
   import { useAuthUserStore } from '@/stores/AuthUser';
@@ -12,6 +12,7 @@
   const movieId = route.params.id;
   const favoriteMovies = ref([]);
   const userAuth = useAuthUserStore();
+  const isAuth = ref(userAuth.isAuth);
   const isFavorite = useIsFavoriteStore();
 
   const movie = ref({
@@ -45,15 +46,15 @@
     }
   }
 
-  const getMovie = async (): Promise<void> => {
-    await axios.get(`https://cinemaguide.skillbox.cc/movie/${movieId}`)
+  const getMovie = async (id: string): Promise<void> => {
+    await axios.get(`https://cinemaguide.skillbox.cc/movie/${id}`)
       .then(response => {
         movie.value = response.data;
       })
   };
 
   const getFavoriteMovies = async (): Promise<void> => {
-    if (userAuth.isAuth) {
+    if (isAuth) {
       await axios.get('https://cinemaguide.skillbox.cc/favorites', { withCredentials: true })
         .then(response => {
           favoriteMovies.value = response.data;
@@ -68,11 +69,18 @@
         .catch(error => {
           console.log(error);
         })
+    } else {
+      isFavorite.isFavorite = false;
     }
   };
 
+  watch(() => route.params.id, (newVal) => {
+    getMovie(newVal)
+    getFavoriteMovies()
+  })
+
   onMounted(() => {
-    getMovie()
+    getMovie(movieId)
     getFavoriteMovies()
   });
 </script>
@@ -81,6 +89,7 @@
   <Container>
     <div class="movie-card">
       <FilmCard
+        class="film-card--all"
         :id="movie.id"
         :rating="movie.tmdbRating"
         :release="movie.releaseYear"
